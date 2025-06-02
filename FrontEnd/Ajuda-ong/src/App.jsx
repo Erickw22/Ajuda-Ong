@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Cadastro from './pages/Cadastro';
-import Home from './pages/Home';
-import CriarPost from './pages/CriarPost';
-import Perfil from './pages/Perfil';
+import Login from './Components/Login';
+import Profile from './Components/Profile';
+import Register from './Components/Register';
+import Home from './Components/Home';
 
 const App = () => {
   return (
@@ -11,10 +10,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Cadastro" element={<Cadastro />} />
+        <Route path="/Register" element={<Register />} />
         <Route path="/Home" element={<Home />} />
-        <Route path="/CriarPost" element={<CriarPost />} />
-        <Route path="/Perfil" element={<Perfil />} />
+        <Route path="/Profile" element={<Profile />} />
       </Routes>
     </Router>
   );

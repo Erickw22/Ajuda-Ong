@@ -1,0 +1,346 @@
+/* Universal box-sizing for consistent layout:
+   Ensures padding and border are included in the element's total width and height. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Basic body styling for full page background and default font */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Consistent modern font stack */
+    line-height: 1.6; /* Improve readability */
+    color: #333; /* Default text color for better readability */
+}
+
+/* Wrapper com fundo gradiente */
+.home-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f2f1 0%, #e3f6f5 100%);
+  padding-top: 60px; /* Space for fixed navbar */
+  padding-bottom: 2rem;
+}
+
+/* Navbar fixa */
+.nav.fixed-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1a1a1a; /* Slightly lighter black for modern feel */
+  z-index: 1000;
+  padding: 0.5rem 2rem; /* Consistent horizontal padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  height: 60px; /* Slightly increased height for better visual balance */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow than login-card */
+}
+
+.logo {
+  font-size: 1.4rem; /* Slightly larger logo for emphasis */
+  font-weight: bold;
+  color: #2e9e8f; /* Brand color */
+  cursor: pointer;
+  text-decoration: none; /* Ensure it doesn't have default link underline */
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 1rem; /* Slightly increased gap for better spacing */
+}
+
+/* General button base style for btn-link and btn-danger */
+.btn-base {
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 1rem; /* Slightly larger font size */
+  cursor: pointer;
+  padding: 0.5rem 1rem; /* Added padding for clickable area */
+  border-radius: 8px; /* Slight roundness for buttons */
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-link {
+  color: #2e9e8f;
+  text-decoration: none; /* Removed underline by default for a cleaner look */
+}
+
+.btn-link:hover {
+  color: #1f6e66; /* Darker on hover */
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.btn-danger {
+  color: #f87171;
+  border: 1px solid #f87171; /* Added a subtle border for definition */
+}
+
+.btn-danger:hover {
+  background-color: #f87171;
+  color: #fff; /* White text on hover */
+}
+
+/* Container padrão */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto; /* Center the container */
+  padding: 0 2rem; /* Consistent padding */
+}
+
+/* Banner */
+.banner {
+    margin-top: 2rem; /* Space below navbar */
+    margin-bottom: 2rem; /* Space above next section */
+}
+
+.banner img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Consistent shadow strength */
+}
+
+/* Categorias */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem; /* Increased gap for better spacing */
+  margin: 3rem 0; /* More vertical space */
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600; /* Slightly bolder */
+  color: #444; /* Slightly darker text for categories */
+  text-align: center;
+  flex-basis: 100px; /* Give a base width to each category item */
+  flex-shrink: 0; /* Prevent shrinking below base width */
+  transition: transform 0.2s ease-in-out;
+}
+
+.category-item:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.category-item img {
+  width: 70px; /* Slightly larger icons */
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 0.75rem; /* Increased margin */
+}
+
+/* Cards gerais - Applying general card styles for consistency */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Unified card shadow */
+  transition: box-shadow 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.12); /* Enhanced shadow on hover */
+  transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Título */
+.title-secondary {
+  font-size: 2rem; /* Consistent with h1 in login-card */
+  font-weight: 700;
+  margin: 2.5rem 0 1.5rem; /* Adjusted margins for better flow */
+  text-align: center;
+  color: #2e9e8f;
+}
+
+/* ONG Cards */
+.ngo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider minmax */
+  gap: 1.5rem; /* Consistent gap */
+}
+
+.highlight-card {
+  background-color: #ffffff;
+  padding: 1.2rem; /* Consistent padding */
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07); /* Slightly stronger shadow */
+  transition: box-shadow 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.highlight-card:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+
+.ngo-name {
+  color: #2e9e8f;
+  font-weight: bold;
+  font-size: 1.1rem; /* Slightly larger font */
+  margin-bottom: 0.5rem;
+}
+
+/* Detalhes da ONG */
+.details-card {
+  background-color: #ffffff;
+  padding: 2rem; /* Increased padding */
+  margin-top: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08); /* Stronger shadow for details */
+}
+
+.details-card .description {
+  margin-bottom: 1.5rem; /* Increased margin */
+  line-height: 1.7; /* Improved readability for long text */
+}
+
+.details-card ul {
+  padding-left: 1.5rem; /* Consistent padding */
+  list-style-type: disc;
+  margin-bottom: 1.5rem;
+}
+
+.details-card ul li {
+    margin-bottom: 0.5rem; /* Space between list items */
+}
+
+.details-card a {
+  color: #2e9e8f;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.details-card a:hover {
+  text-decoration: underline;
+  color: #1f6e66; /* Darker on hover */
+}
+
+/* Botões */
+.btn-primary {
+  background-color: #2e9e8f;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem; /* Slightly larger padding for better click area */
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.05rem; /* Slightly larger font */
+  font-weight: 600;
+  transition: background-color 0.25s ease, transform 0.1s ease-out;
+  display: inline-flex; /* Allows text and icon in button if used */
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* For potential icons */
+}
+
+.btn-primary:hover {
+  background-color: #287770;
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+
+.btn-primary:active {
+    transform: translateY(0); /* Press down effect */
+}
+
+.btn-secondary {
+  background-color: #e0e0e0; /* Softer gray */
+  color: #444; /* Darker text for contrast */
+  border: none;
+  padding: 0.75rem 1.25rem; /* Consistent with primary btn but slightly smaller */
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #d0d0d0;
+    color: #222;
+}
+
+
+/* Mapa */
+.map-card {
+  width: 100%;
+  height: 450px; /* Slightly taller map */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Consistent shadow */
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem; /* Added horizontal padding for small screens */
+  color: #b0b0b0; /* Lighter text for dark background */
+  background-color: #282828; /* Darker, softer background than pure black */
+  font-size: 0.9rem;
+  margin-top: 3rem; /* Space above footer */
+}
+
+/* Responsivo */
+@media (max-width: 767px) {
+    .nav.fixed-nav {
+        padding: 0.5rem 1rem; /* Reduce padding on smaller screens */
+    }
+    .nav-buttons {
+        gap: 0.5rem; /* Reduce gap on small screens */
+    }
+    .logo {
+        font-size: 1.1rem;
+    }
+    .btn-base {
+        font-size: 0.85rem; /* Smaller font for navbar buttons */
+        padding: 0.4rem 0.8rem;
+    }
+    .container {
+        padding: 0 1rem; /* Reduce container padding on small screens */
+    }
+    .login-card, .card, .highlight-card, .details-card {
+        padding: 1.5rem; /* Adjust padding for smaller screens if needed */
+    }
+    .title-secondary {
+        font-size: 1.5rem;
+    }
+    .categories {
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+    .category-item img {
+        width: 50px;
+        height: 50px;
+    }
+    .category-item {
+        font-size: 0.9rem;
+    }
+    .map-card {
+        height: 300px; /* Shorter map on mobile */
+    }
+}
+
+@media (min-width: 768px) {
+  .ngo-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .ngo-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens (changed from 4 for better balance, adjust as needed) */
+  }
+}
+
+@media (min-width: 1200px) {
+    .ngo-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns for very large screens */
+    }
+}
