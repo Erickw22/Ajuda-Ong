@@ -6,45 +6,45 @@ body {
   margin: 0;
   font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   line-height: 1.6;
-  color: #222; /* Texto mais escuro */
-  background-color: #121212; /* Fundo quase preto para contraste */
+  font-size: 16px;
+  color: #222;
+  background-color: #121212;
 }
 
 .home-wrapper {
   min-height: 100vh;
   background: linear-gradient(135deg, #0d1a1a 0%, #144241 100%);
-  padding-top: 60px; /* Espaço para navbar fixa */
+  padding-top: 60px;
   padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Navbar fixa */
 .nav.fixed-nav {
   position: fixed;
   top: 0; left: 0;
   width: 100%;
   height: 60px;
-  background-color: #004d40; /* Verde escuro tirado do teal escuro */
+  background-color: #004d40;
   z-index: 1000;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #e0f2f1; /* Verde claro no texto */
-  box-shadow: 0 4px 20px rgba(0, 77, 64, 0.5); /* Sombra mais escura */
+  color: #e0f2f1;
+  box-shadow: 0 4px 20px rgba(0, 77, 64, 0.5);
   transition: background-color 0.3s ease;
 }
 
 .nav.fixed-nav:hover {
-  background-color: #00281a; /* Preto esverdeado ao passar o mouse */
+  background-color: #00281a;
 }
 
 .logo {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #a5d6d3; /* Verde-água suave */
+  color: #a5d6d3;
   cursor: pointer;
   text-decoration: none;
 }
@@ -52,27 +52,28 @@ body {
 .nav-buttons {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .btn-base {
   background: none;
-  border: 1.5px solid #a5d6d3; /* Borda verde clara */
+  border: 1.5px solid #a5d6d3;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   padding: 0.5rem 1rem;
-  border-radius: 10px; /* Arredondamento consistente com inputs e botões do login */
+  border-radius: 10px;
   transition: background-color 0.25s ease, color 0.25s ease;
   color: #a5d6d3;
 }
 
 .btn-base:hover {
   background-color: #a5d6d3;
-  color: #00281a; /* Fundo claro, texto escuro */
+  color: #00281a;
 }
 
 .btn-link {
-  color: #8ed9d6; /* Verde água claro */
+  color: #8ed9d6;
   text-decoration: none;
 }
 
@@ -92,16 +93,14 @@ body {
   color: #fff;
 }
 
-/* Container padrão */
 .container {
   width: 100%;
   max-width: 1200px;
-  margin: 2rem auto 0 auto; /* Espaçamento superior para ficar abaixo da navbar */
+  margin: 2rem auto 0 auto;
   padding: 0 2rem;
-  color: #ddd; /* Texto claro no container */
+  color: #ddd;
 }
 
-/* Banner */
 .banner {
   margin-bottom: 2rem;
 }
@@ -114,7 +113,6 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.7);
 }
 
-/* Categorias */
 .categories {
   display: flex;
   flex-wrap: wrap;
@@ -128,7 +126,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-weight: 600;
-  color: #80cbc4; /* Verde água escuro */
+  color: #80cbc4;
   text-align: center;
   flex-basis: 100px;
   flex-shrink: 0;
@@ -138,7 +136,7 @@ body {
 
 .category-item:hover {
   transform: translateY(-5px);
-  color: #b2dfdb; /* Verde mais claro no hover */
+  color: #b2dfdb;
 }
 
 .category-item img {
@@ -149,7 +147,6 @@ body {
   filter: drop-shadow(0 0 1px #000);
 }
 
-/* Cards gerais */
 .card {
   background: #1e1e1e;
   border-radius: 12px;
@@ -167,7 +164,6 @@ body {
   color: #e0f2f1;
 }
 
-/* Título */
 .title-secondary {
   font-size: 2rem;
   font-weight: 700;
@@ -176,10 +172,9 @@ body {
   color: #80cbc4;
 }
 
-/* ONG Cards */
 .ngo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
 }
 
@@ -206,7 +201,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Detalhes da ONG */
 .details-card {
   background-color: #222;
   padding: 2rem;
@@ -245,9 +239,8 @@ body {
   text-decoration: underline;
 }
 
-/* Botões */
 .btn-primary {
-  background-color: #00796b; /* Verde escuro forte */
+  background-color: #00796b;
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -272,7 +265,7 @@ body {
 }
 
 .btn-secondary {
-  background-color: #004d40; /* Verde bem escuro */
+  background-color: #004d40;
   color: #a5d6d3;
   border: none;
   padding: 0.75rem 1.25rem;
@@ -287,7 +280,6 @@ body {
   color: #e0f2f1;
 }
 
-/* Mapa */
 .map-card {
   width: 100%;
   height: 450px;
@@ -297,7 +289,6 @@ body {
   box-shadow: 0 4px 20px rgba(0,0,0,0.8);
 }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 2rem 1rem;
@@ -307,19 +298,19 @@ body {
   margin-top: 3rem;
   border-radius: 0 0 12px 12px;
 }
+
 .nav.fixed-nav {
-  padding-top: 1rem; /* Espaço entre topo da página e nav */
+  padding-top: 1rem;
 }
 
 .logo img {
-  margin-top: 0; /* Se quiser que a imagem fique alinhada na parte superior do nav */
+  margin-top: 0;
 }
 
-
-/* Responsivo */
 @media (max-width: 767px) {
   .nav.fixed-nav {
     padding: 0.5rem 1rem;
+    height: auto;
   }
   .nav-buttons {
     gap: 0.5rem;
@@ -356,20 +347,59 @@ body {
   }
 }
 
-@media (min-width: 768px) {
-  .ngo-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .home-wrapper {
+    padding-top: 50px;
+    padding-bottom: 1rem;
+  }
+  .nav.fixed-nav {
+    height: auto;
+    padding: 0.25rem 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-buttons {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-end;
+  }
+  .logo {
+    font-size: 1rem;
+  }
+  .btn-base, .btn-primary, .btn-secondary {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.6rem;
+  }
+  .category-item img {
+    width: 40px;
+    height: 40px;
+  }
+  .category-item {
+    flex-basis: 80px;
+  }
+  .map-card {
+    height: 200px;
+  }
+  .container {
+    padding: 0 0.5rem;
+  }
+  .card, .highlight-card, .details-card {
+    padding: 1rem;
+  }
+  .title-secondary {
+    font-size: 1.25rem;
   }
 }
 
-@media (min-width: 1024px) {
-  .ngo-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  .ngo-grid {
-    grid-template-columns: repeat(4, 1fr);
+@media (hover: none) {
+  .category-item:hover,
+  .card:hover,
+  .highlight-card:hover {
+    transform: none;
+    box-shadow: none;
   }
 }

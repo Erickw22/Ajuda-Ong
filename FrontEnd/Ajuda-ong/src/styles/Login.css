@@ -99,7 +99,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
   box-shadow: 0 2px 8px #064d47bb;
 }
 
@@ -107,6 +107,7 @@ body {
   background-color: #64ffda;
   color: #121212;
   box-shadow: 0 4px 12px #64ffdaee;
+  transform: translateY(-2px);
 }
 
 .login-btn:disabled {
@@ -149,4 +150,85 @@ body {
 .link-forgot:hover,
 .link-register:hover {
   color: #22aa99;
+}
+
+/* Tablet: até 768px */
+@media (max-width: 768px) {
+  .login-card {
+    padding: 1.75rem 2rem;
+    border-radius: 10px;
+  }
+
+  .login-card h1 {
+    font-size: 1.6rem;
+  }
+
+  .input-group input {
+    padding: 0.7rem 0.9rem 0.7rem 2.8rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
+
+  .login-btn {
+    font-size: 1rem;
+    padding: 0.65rem;
+    border-radius: 8px;
+  }
+}
+
+/* Mobile: até 480px */
+@media (max-width: 480px) {
+  .login-wrapper {
+    padding: 1.5rem;
+  }
+
+  .login-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 8px;
+  }
+
+  .login-card h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .login-card p.subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .input-group svg {
+    left: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .input-group input {
+    padding: 0.65rem 0.85rem 0.65rem 2.5rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .login-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    border-radius: 6px;
+  }
+
+  .error-msg {
+    font-size: 0.8rem;
+    padding: 0.65rem 0.85rem;
+  }
+
+  .link-forgot,
+  .link-register {
+    font-size: 0.8rem;
+  }
+}
+
+/* Para evitar hover em telas touch */
+@media (hover: none) {
+  .login-btn:hover:not(:disabled) {
+    transform: none;
+    box-shadow: none;
+  }
 }
