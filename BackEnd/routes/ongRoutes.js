@@ -34,7 +34,6 @@ router.get('/list', async (req, res) => {
 router.get('/details/:id', async (req, res) => {
   const { id } = req.params;
 
-  // Validação básica do ID para evitar erro CastError do mongoose
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ msg: 'ID inválido' });
   }

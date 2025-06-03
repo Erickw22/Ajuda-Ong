@@ -27,13 +27,12 @@ const OngSchema = new mongoose.Schema(
       instagram: { type: String, trim: true, default: "" },
       facebook: { type: String, trim: true, default: "" },
       twitter: { type: String, trim: true, default: "" },
-      // Você pode adicionar outras redes aqui
     },
 
-    pixKey: { type: String, trim: true, default: "" }, // chave Pix (CPF, e-mail, telefone, etc)
+    pixKey: { type: String, trim: true, default: "" }, 
   },
   {
-    timestamps: true, // cria createdAt e updatedAt automaticamente
+    timestamps: true,
   }
 );
 

@@ -8,12 +8,10 @@ const { authMiddleware } = require("../middlewares/authMiddleware");
 
 const JWT_SECRET = process.env.JWT_SECRET || "seu_segredo_super_secreto";
 
-// Função simples para validar formato de email
 const isValidEmail = (email) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
 
-// Registro de usuário
 router.post("/register", async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
@@ -91,7 +89,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Obter dados do usuário autenticado
 router.get("/me", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-passwordHash");
@@ -105,7 +102,6 @@ router.get("/me", authMiddleware, async (req, res) => {
   }
 });
 
-// Atualizar dados do usuário autenticado
 router.patch("/me", authMiddleware, async (req, res) => {
   const { firstName, lastName, email } = req.body;
 
@@ -119,7 +115,6 @@ router.patch("/me", authMiddleware, async (req, res) => {
     return res.status(400).json({ msg: "Email inválido" });
   }
 
-  // Valida se o ID do usuário é válido
   if (!mongoose.Types.ObjectId.isValid(req.user.id)) {
     return res.status(400).json({ msg: "ID de usuário inválido" });
   }
