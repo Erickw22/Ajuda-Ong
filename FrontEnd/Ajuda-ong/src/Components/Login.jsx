@@ -1,12 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { FiLogIn, FiMail, FiLock, FiAlertCircle } from "react-icons/fi";
+import { useNavigate, Link } from "react-router-dom";
+import { FiLogIn, FiMail, FiLock } from "react-icons/fi";
 import "../styles/Login.css";
+
+import ToastService from "../assets/toastService";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -17,16 +20,18 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setIsLoading(true);
+    ToastService.loading("login-loading", "Validando credenciais...");
     try {
       const res = await axios.post("http://localhost:5000/auth/login", formData);
 
       localStorage.setItem("token", res.data.token);
-
+      ToastService.dismiss("login-loading");
+      ToastService.success("Login realizado com sucesso!");
       navigate("/home");
     } catch (err) {
-      setError(
+      ToastService.dismiss("login-loading");
+      ToastService.error(
         err.response?.data?.msg || "Credenciais inválidas ou erro no servidor"
       );
     } finally {
@@ -41,13 +46,6 @@ const Login = () => {
           <h1>Bem-vindo ao Ajude uma Ong</h1>
           <p className="subtitle">Faça login para acessar sua conta</p>
         </header>
-
-        {error && (
-          <div className="error-msg" role="alert">
-            <FiAlertCircle />
-            <span>{error}</span>
-          </div>
-        )}
 
         <form onSubmit={onSubmit} noValidate>
           <div className="input-group">
@@ -86,6 +84,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
+            aria-disabled={isLoading}
             className="login-btn"
             aria-busy={isLoading}
           >
@@ -101,11 +100,13 @@ const Login = () => {
         </form>
 
         <div className="links-container">
-          <a href="/register" className="link-register" tabIndex={0}>
+          <Link to="/register" className="link-register">
             Não tem uma conta? Criar conta grátis!
-          </a>
+          </Link>
         </div>
       </div>
+
+      <ToastContainer />
     </div>
   );
 };

@@ -1,86 +1,144 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import "../styles/Home.css";
-import axios from 'axios';
+import axios from "axios";
+import logo from '../assets/logo02.png';
 
-// Configuração da API
+
+import ToastService from "../assets/toastService";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+});
+
 const api = axios.create({
-  baseURL: 'http://localhost:5000/posts' // Ajuste conforme necessário
+  baseURL: "http://localhost:5000/ongs",
 });
 
 const Home = () => {
-  const [posts, setPosts] = useState([]);
+  const [ongs, setOngs] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchOngs = async () => {
+      setLoading(true);
+      ToastService.loading("loading-toast", "Carregando lista de ONGs...");
       try {
-        const res = await api.get('/');
-        setPosts(res.data);
+        const res = await api.get("/list");
+        setOngs(res.data);
+        ToastService.dismiss("loading-toast");
+        ToastService.success("Lista de ONGs carregada com sucesso!");
       } catch (err) {
-        console.error('Erro ao buscar posts:', err);
+        ToastService.dismiss("loading-toast");
+        console.error(
+          "Erro ao buscar ONGs:",
+          err.response || err.message || err
+        );
+        ToastService.error(
+          "Erro ao carregar a lista de ONGs. Tente novamente mais tarde."
+        );
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchPosts();
+    fetchOngs();
   }, []);
-
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login'); 
-  };
 
   return (
     <div className="home-wrapper">
-      {/* Navbar fixa */}
-      <nav className="nav fixed-nav" aria-label="Navegação principal">
-        <Link className="logo" to="/">Ajude uma Ong</Link>
+      <nav className="nav fixed-nav">
+        <Link className="logo" to="/">
+          <img src={logo} alt="Ajude uma ONG" style={{ height: '90px' }} />
+        </Link>
         <div className="nav-buttons">
-          <button className="btn-base btn-link" onClick={handleLogout} aria-label="Sair da conta">
-            Sair
-          </button>
-          <Link to="/Profile" className="btn-base btn-link" aria-label="Página do perfil do usuário">
+          <Link to="/profile" className="btn-base btn-link">
             Perfil
           </Link>
         </div>
       </nav>
 
       <main className="container">
-        {/* Banner do blog ou imagem ilustrativa */}
-        <section className="banner" aria-label="Banner do blog">
-          <img
-            src="https://via.placeholder.com/1200x300.png?text=Bem-vindo+ao+Blog"
-            alt="Banner com texto Bem-vindo ao Blog"
-          />
+        <section aria-labelledby="mapa-ongs">
+          <h2 id="mapa-ongs" className="title-secondary">
+            Mapa de ONGs de Proteção Animal
+          </h2>
+
+          <MapContainer
+            center={[-8.0476, -34.877]}
+            zoom={10}
+            style={{ height: "400px", width: "100%" }}
+          >
+            <TileLayer
+              attribution="&copy; OpenStreetMap contributors"
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {ongs.map(
+              (ong) =>
+                ong.location?.lat &&
+                ong.location?.lng && (
+                  <Marker
+                    key={ong._id}
+                    position={[ong.location.lat, ong.location.lng]}
+                  >
+                    <Popup>
+                      <strong>{ong.name}</strong>
+                      <br />
+                      {ong.address}
+                      <br />
+                      {ong.phone}
+                    </Popup>
+                  </Marker>
+                )
+            )}
+          </MapContainer>
         </section>
 
-        {/* Posts criados Recentes */}
-        <section aria-labelledby="posts-recentes">
-          <h2 id="posts-recentes" className="title-secondary">Posts Recentes</h2>
+        <section aria-labelledby="lista-ongs">
+          <h2 id="lista-ongs" className="title-secondary">
+            Lista de ONGs
+          </h2>
           <div className="ngo-grid">
-            {posts.length > 0 ? (
-              posts.map((post) => (
-                <article key={post._id} className="highlight-card" aria-label={`Post: ${post.title}`}>
-                  <h3 className="ngo-name">{post.title}</h3>
-                  <p>{post.content}</p>
-                  <small>Por: {post.author?.firstName || 'Anônimo'}</small>
-                  <br />
-                  <Link to={`/post/${post._id}`} className="btn-link" aria-label={`Leia mais sobre ${post.title}`}>
-                    Leia mais
+            {loading ? (
+              <p>Carregando ONGs...</p>
+            ) : ongs.length > 0 ? (
+              ongs.map((ong) => (
+                <article key={ong._id} className="highlight-card">
+                  <h3 className="ngo-name">{ong.name}</h3>
+                  <p>
+                    <strong>Endereço:</strong> {ong.address}
+                  </p>
+                  <p>
+                    <strong>Telefone:</strong> {ong.phone}
+                  </p>
+                  <Link to={`/ong/${ong._id}`} className="btn-link">
+                    Ver detalhes
                   </Link>
                 </article>
               ))
             ) : (
-              <p>Nenhum post encontrado.</p>
+              <p>Nenhuma ONG encontrada.</p>
             )}
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="footer" role="contentinfo">
-        &copy; {new Date().getFullYear()} Ajude-ong. Todos os direitos reservados.
+      <footer className="footer">
+        &copy; {new Date().getFullYear()} Ajude-ong. Todos os direitos
+        reservados.
       </footer>
+
+      <ToastContainer />
     </div>
   );
 };

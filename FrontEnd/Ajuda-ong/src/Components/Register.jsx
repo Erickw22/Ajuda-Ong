@@ -24,11 +24,9 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      // Endpoint para o padrão auth/register
       await axios.post('http://localhost:5000/auth/register', formData);
       navigate('/login');
     } catch (err) {
-      // Mensagem de erro vinda do backend (campo msg)
       setError(err.response?.data?.msg || 'Erro ao criar conta. Tente novamente.');
     } finally {
       setIsLoading(false);
@@ -39,7 +37,7 @@ const Register = () => {
     <div className="login-wrapper">
       <div className="login-card">
         <h1>
-          Junte-se ao <span style={{ color: '#2e9e8f' }}>Blog</span>
+          Junte-se ao <span style={{ color: '#2e9e8f' }}>Ajuda Ong</span>
         </h1>
         <p className="subtitle">Crie sua conta grátis!</p>
 
@@ -51,7 +49,6 @@ const Register = () => {
         )}
 
         <form onSubmit={onSubmit}>
-          {/* Inputs nome e sobrenome lado a lado */}
           <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.25rem' }}>
             <div className="input-group" style={{ flex: 1 }}>
               <FiUser />
@@ -80,7 +77,6 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Email */}
           <div className="input-group">
             <FiMail />
             <input

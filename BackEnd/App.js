@@ -1,57 +1,49 @@
-// Importa o framework Express para criar o servidor
 const express = require('express');
-
-// Importa o Mongoose para conectar e manipular o banco de dados MongoDB
 const mongoose = require('mongoose');
-
-// Importa o CORS para permitir requisições de outros domínios (Cross-Origin Resource Sharing)
 const cors = require('cors');
+require('dotenv').config();
 
-// Importa as rotas definidas separadamente em arquivos
-const userRoutes = require('./routes/userRoutes');   // Rotas relacionadas aos usuários
-const authRoutes = require('./routes/auth');         // Rotas de autenticação (registro, login, etc.)
+const authRoutes = require('./routes/auth');
+const ongRoutes = require('./routes/ongRoutes');
 
-// Cria uma instância do aplicativo Express
 const app = express();
 
-// Aplica o middleware CORS para permitir chamadas de APIs de diferentes origens
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*', 
+}));
 
-// Aplica o middleware que permite o Express interpretar JSON no corpo das requisições
 app.use(express.json());
 
-/*
-===============================================
-|   CONEXÃO COM O BANCO DE DADOS MONGODB     |
-===============================================
-*/
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) {
+  console.error('Erro: variável de ambiente MONGO_URI não definida!');
+  process.exit(1);
+}
 
-// Faz a conexão com o MongoDB Atlas através da URL de conexão (substituir 'seu_banco' pelo nome real)
-mongoose.connect('mongodb+srv://crosfyrenonear:Gjewi200.2@alunos.ja4xu.mongodb.net/seu_banco?retryWrites=true&w=majority')
-  .then(() => console.log('MongoDB conectado!')) // Se conectar com sucesso, exibe mensagem
-  .catch(err => console.error('Erro ao conectar ao MongoDB:', err)); // Se der erro, exibe mensagem
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('MongoDB conectado!'))
+  .catch(err => {
+    console.error('Erro ao conectar ao MongoDB:', err);
+    process.exit(1);
+  });
 
-/*
-===============================================
-|   REGISTRO DAS ROTAS                       |
-===============================================
-*/
-
-// Define que todas as rotas relacionadas a usuários terão o prefixo /users
-app.use('/users', userRoutes);
-
-
-// Define que todas as rotas relacionadas à autenticação terão o prefixo /auth
+app.use('/ongs', ongRoutes);
 app.use('/auth', authRoutes);
 
-/*
-===============================================
-|   INICIALIZAÇÃO DO SERVIDOR                |
-===============================================
-*/
+app.use((req, res) => {
+  res.status(404).json({ error: 'Rota não encontrada.' });
+});
 
-// Define a porta em que o servidor vai rodar
-const PORT = 5000;
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Erro interno no servidor' });
+});
 
-// Inicia o servidor e exibe mensagem no console quando estiver rodando
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
