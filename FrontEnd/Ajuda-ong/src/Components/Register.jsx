@@ -24,7 +24,7 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      await axios.post('http://localhost:5000/auth/register', formData);
+      await axios.post('https://ajuda-ong-ten.vercel.app/auth/register', formData);
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.msg || 'Erro ao criar conta. Tente novamente.');

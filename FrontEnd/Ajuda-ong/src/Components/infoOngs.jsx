@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ToastService from "../assets/toastService";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/ongs",
+  baseURL: "https://ajuda-ong-ten.vercel.app/ongs",
 });
 
 const InfoOngs = () => {

@@ -28,7 +28,7 @@ const Profile = () => {
 
       ToastService.loading('loading-profile', 'Carregando dados do perfil...');
       try {
-        const res = await axios.get('http://localhost:5000/auth/me', {
+        const res = await axios.get('https://ajuda-ong-ten.vercel.app/auth/me', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -83,7 +83,7 @@ const Profile = () => {
       if (!token) return;
       ToastService.loading('loading-profile', 'Recarregando dados...');
       try {
-        const res = await axios.get('http://localhost:5000/auth/me', {
+        const res = await axios.get('https://ajuda-ong-ten.vercel.app/auth/me', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData({
@@ -113,7 +113,7 @@ const Profile = () => {
     ToastService.loading('saving-profile', 'Salvando alterações...');
     try {
       await axios.patch(
-        'http://localhost:5000/auth/me',
+        'https://ajuda-ong-ten.vercel.app/auth/me',
         {
           firstName: userData.firstName,
           lastName: userData.lastName,
