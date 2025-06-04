@@ -9,7 +9,7 @@ const ongRoutes = require('./routes/ongRoutes');
 const app = express();
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*', 
+  origin: process.env.FRONTEND_URL || '*',
 }));
 
 app.use(express.json());
@@ -42,8 +42,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Erro interno no servidor' });
 });
 
-const PORT = process.env.PORT || 5000;
+const serverless = require('serverless-http');
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+module.exports.handler = serverless(app);
