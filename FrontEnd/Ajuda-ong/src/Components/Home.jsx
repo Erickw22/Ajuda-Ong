@@ -21,7 +21,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const api = axios.create({
-  baseURL: "https://ajuda-ong-ten.vercel.app/ongs",
+  baseURL: "http://localhost:5000/ongs",
 });
 
 const Home = () => {
