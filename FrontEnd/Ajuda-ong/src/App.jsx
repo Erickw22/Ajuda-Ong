@@ -36,9 +36,9 @@ const App = () => {
             path="/"
             element={
               isLoggedIn() ? (
-                <Navigate to="/home" replace />
-              ) : (
                 <Navigate to="/login" replace />
+              ) : (
+                <Navigate to="/home" replace />
               )
             }
           />
